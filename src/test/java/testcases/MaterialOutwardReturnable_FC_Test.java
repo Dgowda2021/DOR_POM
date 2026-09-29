@@ -20,14 +20,13 @@ import pages.ViewListFormFields;
 
 public class MaterialOutwardReturnable_FC_Test extends BaseLogin {
 
-    private static final Logger logger =
-            LogManager.getLogger(MaterialOutwardReturnable_FC_Test.class);
+    private static final Logger logger = LogManager.getLogger(MaterialOutwardReturnable_FC_Test.class);
 
     // CREATE TEST
     @Test(priority = 1)
     public void NewEntryFormCreateTest() throws InterruptedException {
 
-        test = extent.createTest("Material Outward Returnable", "Verify that a user can successfully create a Material Outward Returnable form in Fulfillment Center.");
+        test = extent.createTest("Material Outward Register (Returnable) Create Test", "Verify that a user can successfully create a Material Outward Returnable form in Fulfillment Center.");
 
         SoftAssert softAssert = new SoftAssert();
 
@@ -308,15 +307,15 @@ public class MaterialOutwardReturnable_FC_Test extends BaseLogin {
 
     @Test(priority = 2)
     public void verifyCreatedFormDateTest() throws InterruptedException {
-        test = extent.createTest("Material Outward Returnable Update\", \"Verify that a user can successfully update a Material Outward Returnable form in Fulfillment Center.");
+        test = extent.createTest("Material Outward Register (Returnable) Created Date verification", "Verify the created date of a Material Outward Returnable form in Fulfillment Center.");
 
         SoftAssert softAssert = new SoftAssert();
 
         logger.info("=================================================");
-        logger.info("Starting Material Outward Returnable form Update test.");
+        logger.info("Starting Material Outward Returnable form created date verification test.");
         logger.info("=================================================");
 
-        test.info("Starting Material Outward Returnable form Update test.");
+        test.info("Starting Material Outward Returnable form created date verify test.");
 
         try {
             Registers registers = new Registers(driver);
@@ -392,15 +391,15 @@ public class MaterialOutwardReturnable_FC_Test extends BaseLogin {
     @Test(priority = 3)
     public void ListFormVerifyTest() throws InterruptedException {
 
-        test = extent.createTest("Material Outward Returnable Update\", \"Verify that a user can successfully update a Material Outward Returnable form in Fulfillment Center.");
+        test = extent.createTest("Material Outward Register (Returnable) form verify Test", "Verify the user created a Material Outward Returnable form fields in Fulfillment Center.");
 
         SoftAssert softAssert = new SoftAssert();
 
         logger.info("=================================================");
-        logger.info("Starting Material Outward Returnable form Update test.");
+        logger.info("Starting Material Outward Returnable form verifiation.");
         logger.info("=================================================");
 
-        test.info("Starting Material Outward Returnable form Update test.");
+        test.info("Starting Material Outward Returnable form verfication.");
 
         try {
             // REGISTERS
@@ -548,25 +547,11 @@ public class MaterialOutwardReturnable_FC_Test extends BaseLogin {
             logger.info("Material Outward Returnable form created successfully.");
             test.pass("Material Outward Returnable form created successfully.");
 
-
             // FINAL ASSERTION
             softAssert.assertAll();
 
             logger.info("All created form details verified successfully in View List.");
-
             test.pass("All created form details are present and verified successfully in View List.");
-
-
-//                // FINAL ASSERTION
-//                String expectedMessage = "Form updated succesfully";
-//                String actualMessage = newEntry.getSuccessMessage();
-//
-//                logger.info("Validating form updation message. Expected: {}, Actual: {}", expectedMessage, actualMessage);
-//
-//                softAssert.assertEquals(actualMessage, expectedMessage, "Material Outward Returnable form was not updated successfully.");
-//                softAssert.assertAll();
-//                logger.info("Material Outward Returnable form updated successfully.");
-//                test.pass("Material Outward Returnable form updated successfully.");
 
         } catch (Exception e) {
             logger.error("Material Outward Returnable update test failed.", e);
@@ -578,7 +563,7 @@ public class MaterialOutwardReturnable_FC_Test extends BaseLogin {
     @Test(priority = 4)
     public void ListFormUpdateTest() throws InterruptedException {
 
-        test = extent.createTest("Material Outward Returnable Update\", \"Verify that a user can successfully update a Material Outward Returnable form in Fulfillment Center.");
+        test = extent.createTest("Material Outward Register (Returnable) Update Test", "Verify that a user can successfully update a Material Outward Returnable form in Fulfillment Center.");
 
         SoftAssert softAssert = new SoftAssert();
 

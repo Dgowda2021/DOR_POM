@@ -2,6 +2,7 @@ package base;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.Login;
 
@@ -15,7 +16,7 @@ public class BaseLogin extends Base {
     private static final Logger logger = LogManager.getLogger(BaseLogin.class);
 
     // DOR LOGIN
-    @BeforeMethod
+    @BeforeClass
     public void DORLogin() throws IOException {
         logger.info("===== Starting DOR Login =====");
         try {

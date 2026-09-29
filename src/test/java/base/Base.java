@@ -9,9 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -28,7 +26,7 @@ public class Base {
     protected ExtentTest test;
 
     // TEST SETUP
-    @BeforeMethod
+    @BeforeClass
     public void setup() throws IOException {
 
         logger.info("===== Starting Test Setup =====");
@@ -74,7 +72,7 @@ public class Base {
 
     // TEST TEARDOWN
     @AfterMethod
-    public void teardown(ITestResult result) throws IOException {
+    public void afterMethod(ITestResult result) throws IOException {
         logger.info("===== Starting Test Teardown =====");
         try {
             if (result == null) {
@@ -83,7 +81,7 @@ public class Base {
             }
             String testName = result.getName();
 
-    // TEST PASSED
+            // TEST PASSED
             if (result.getStatus() == ITestResult.SUCCESS) {
                 logger.info("Test passed: {}", testName);
                 if (test != null) {
@@ -91,12 +89,12 @@ public class Base {
                 }
             }
 
-    // TEST FAILED
-             else if (result.getStatus() == ITestResult.FAILURE) {
-                 logger.error("Test failed: {}", testName);
-             if (result.getThrowable() != null) {
+            // TEST FAILED
+            else if (result.getStatus() == ITestResult.FAILURE) {
+                logger.error("Test failed: {}", testName);
+                if (result.getThrowable() != null) {
                     logger.error("Test failure reason: {}", result.getThrowable().getMessage());
-             }
+                }
 
                 if (test != null) {
                     test.fail("Test Case Failed");
@@ -104,7 +102,7 @@ public class Base {
                         test.fail(result.getThrowable());
                     }
 
-    // Capture screenshot on failure
+                    // Capture screenshot on failure
                     if (driver != null) {
                         logger.info("Capturing failure screenshot for test: {}", testName);
                         String screenshotPath = ScreenshotUtil.takeScreenshot(driver, testName);
@@ -114,7 +112,7 @@ public class Base {
                 }
             }
 
-    // TEST SKIPPED
+            // TEST SKIPPED
             else if (result.getStatus() == ITestResult.SKIP) {
                 logger.warn("Test skipped: {}", testName);
                 if (test != null) {
@@ -126,24 +124,28 @@ public class Base {
             }
         } catch (Exception e) {
             logger.error("Error occurred during test teardown.", e);
-        } finally {
+        }
+    }
 
 
     // CLOSE BROWSER
-            if (driver != null) {
-                logger.info("Closing browser.");
-                try {
-//                    driver.quit();
-                } catch (Exception e) {
-                    logger.error("Failed to close browser properly.", e);
-                } finally {
-                    driver = null;
-                }
+    @AfterClass
+    public void tearDown() {
+        logger.info("===== Starting Browser Teardown =====");
+        if (driver != null) {
+            logger.info("Closing browser.");
+            try {
+                driver.quit();
+            } catch (Exception e) {
+                logger.error("Failed to close browser properly.", e);
+            } finally {
+                driver = null;
             }
-
-            logger.info("===== Test Teardown Completed =====");
         }
+
+        logger.info("===== Test Teardown Completed =====");
     }
+
 
     // EXTENT REPORT FLUSH
     @AfterSuite
@@ -157,4 +159,3 @@ public class Base {
         }
     }
 }
-

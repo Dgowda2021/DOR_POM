@@ -43,11 +43,16 @@ public class ViewListFormFields extends BasePage {
 
         waitForVisible(createdDateTime);
 
+//        String text = createdDateTime.getText().trim();
+//
+//        logger.info("Created form date/time: {}", text);
+//
+//        return text.split("\\n")[1].trim();
         String text = createdDateTime.getText().trim();
-
-        logger.info("Created form date/time: {}", text);
-
-        return text.split("\\n")[1].trim();
+        String dateTime = text.split("\\n")[1].trim();
+        String date = dateTime.split(",")[0].trim();
+        logger.info("Created form date: {}", date);
+        return date;
     }
 
     // -------------------------------------------------------------------------
