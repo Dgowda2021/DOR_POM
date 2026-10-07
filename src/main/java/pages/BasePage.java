@@ -96,4 +96,16 @@ public class BasePage {
                 ExpectedConditions.visibilityOf(element)
         );
     }
+
+    protected boolean isDisplayed(WebElement element) {
+
+        try {
+            return wait.until(
+                    ExpectedConditions.visibilityOf(element)
+            ).isDisplayed();
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

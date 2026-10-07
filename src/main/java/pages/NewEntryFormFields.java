@@ -30,7 +30,7 @@ public class NewEntryFormFields extends BasePage {
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        logger.debug("NewEntryFormFields page initialized.");
+        logger.info("NewEntryFormFields page initialized.");
     }
 
     // -------------------------------------------------------------------------
