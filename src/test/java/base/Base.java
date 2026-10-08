@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
@@ -14,6 +15,7 @@ import org.testng.annotations.*;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 
+import utilities.ConfigReader;
 import utilities.ExtentReportManager;
 import utilities.ScreenshotUtil;
 
@@ -34,11 +36,28 @@ public class Base {
         try {
             // Initialize Chrome browser
             logger.info("Initializing Chrome browser.");
-            driver = new ChromeDriver();
 
-            // Other browsers can be enabled when required
-            // driver = new EdgeDriver();
-            // driver = new FirefoxDriver();
+            ChromeOptions options = new ChromeOptions();
+
+            if (ConfigReader.isHeadless()) {
+
+                logger.info("Headless mode is enabled.");
+
+                options.addArguments("--headless=new");
+                options.addArguments("--window-size=1920,1080");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+
+                logger.info("Chrome will run in HEADLESS mode.");
+
+            } else {
+
+                logger.info("Headless mode is disabled.");
+                logger.info("Chrome will run in NORMAL mode.");
+            }
+
+            driver = new ChromeDriver(options);
 
             // Maximize browser window
             logger.info("Maximizing browser window.");

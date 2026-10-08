@@ -10,7 +10,6 @@ import java.util.Properties;
 public class ConfigReader {
 
     private static final Logger logger = LogManager.getLogger(ConfigReader.class);
-
     private static final String CONFIG_FILE_PATH = "Config/config.properties";
 
     private ConfigReader() {
@@ -114,5 +113,32 @@ public class ConfigReader {
         logger.debug("Password loaded successfully.");
 
         return password;
+    }
+
+    /**
+     * Returns whether Selenium should run Chrome in headless mode.
+     *
+     * System property takes priority over config.properties.
+     *
+     * Example:
+     * mvn test -Dheadless=true
+     */
+    public static boolean isHeadless() throws IOException {
+
+        logger.debug("Reading headless mode configuration.");
+
+        String headless = System.getProperty("headless");
+
+        if (headless == null || headless.isBlank()) {
+
+            headless = getLoadedPropertiesObject()
+                    .getProperty("headless", "false");
+        }
+
+        boolean headlessMode = Boolean.parseBoolean(headless);
+
+        logger.info("Headless mode: {}", headlessMode);
+
+        return headlessMode;
     }
 }
